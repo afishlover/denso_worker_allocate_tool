@@ -6,10 +6,14 @@ namespace Server.Utils
     public class FakeContext
     {
         private List<WorkerModel> Workers = new List<WorkerModel>();
+        private List<LineModel> Lines = new List<LineModel>();
         public FakeContext()
         {
             var workerStr = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), @"Localdb/worker.json"));
             Workers = JsonConvert.DeserializeObject<List<WorkerModel>>(workerStr);
+
+            var lineStr = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), @"Localdb/line.json"));
+            Lines = JsonConvert.DeserializeObject<List<LineModel>>(lineStr);
         }
 
         #region Worker
@@ -38,6 +42,29 @@ namespace Server.Utils
             }
         }
 
+        public bool UpdateWorker(WorkerModel worker)
+        {
+            try
+            {
+                var oldWorker = Workers.FirstOrDefault(x => x.WorkerId.Equals(worker.WorkerId.ToLower()));
+                if (oldWorker != null)
+                {
+                    oldWorker.WorkerName = worker.WorkerName;
+                    oldWorker.WorkerSalary = worker.WorkerSalary;
+                    oldWorker.WorkerStages = worker.WorkerStages;
+                }
+                else
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool DeleteWorker(string workerId)
         {
             try
@@ -53,6 +80,9 @@ namespace Server.Utils
             }
         }
 
+        #endregion
+
+        #region Lines
         #endregion
     }
 }

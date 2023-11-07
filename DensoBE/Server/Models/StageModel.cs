@@ -2,8 +2,8 @@
 {
     public class StageModel
     {
-        public int StageId { get; set; }
-        public string StageName { get; set; } = string.Empty;
+        public string StageId { get; set; } = Guid.NewGuid().ToString();
+        public string StageName { get; set; }
         public int StageScore { get; set; }
     }
 }

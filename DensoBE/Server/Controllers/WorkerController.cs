@@ -18,7 +18,7 @@ namespace Server.Controllers
             _fakeContext = new FakeContext();
         }
 
-        [HttpGet]
+        [HttpGet("AllWorker")]
         public IActionResult GetAllWorkers()
         {
             try
@@ -41,7 +41,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("CreateWorker")]
-        public IActionResult CreateWorker(WorkerDTO workerDTO)
+        public IActionResult CreateWorker([FromBody] WorkerDTO workerDTO)
         {
             try
             {
@@ -95,5 +95,59 @@ namespace Server.Controllers
                 };
             };
         }
+
+        [HttpGet("GetWorker/{workerId}")]
+        public IActionResult GetWorkerById(string workerId)
+        {
+            try
+            {
+                return new ContentResult
+                {
+                    Content = JsonConvert.SerializeObject(_fakeContext.GetWorkerById(workerId)),
+                    ContentType = "application/json",
+                    StatusCode = 200
+                };
+            }
+            catch (Exception)
+            {
+                return new ContentResult
+                {
+                    Content = null,
+                    StatusCode = 400
+                };
+            }
+        }
+
+        //[HttpPut("UpdateWorker/{workerId}")]
+        //public IActionResult UpdateWorker([FromBody] WorkerModel workerDTO, string workerId)
+        //{
+        //    try
+        //    {
+        //        var workerModel = new WorkerModel
+        //        {
+        //            WorkerName = workerDTO.WorkerName,
+        //            WorkerSalary = workerDTO.WorkerSalary,
+        //            WorkerAge = workerDTO.WorkerAge,
+        //            WorkerStages = workerDTO.WorkerStages
+        //        };
+
+        //        _fakeContext.CreateWorker(workerModel);
+
+        //        return new ContentResult
+        //        {
+        //            Content = JsonConvert.SerializeObject($"Update worker with id {workerModel.WorkerId} successfully."),
+        //            ContentType = "application/json",
+        //            StatusCode = 200
+        //        };
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return new ContentResult
+        //        {
+        //            Content = "Create new worker failed.",
+        //            StatusCode = 400
+        //        };
+        //    };
+        //}
     }
 }

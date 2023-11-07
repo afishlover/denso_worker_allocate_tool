@@ -6,7 +6,7 @@
     "WorkerSalary": 5000,
     "WorkerStages": [
       {
-        "StageId": 1,
+        "StageId": "0a4a5dc6-56fe-40c2-9605-c42030a2792b",
         "StageName": "Rửa linh kiện",
         "StageScore": 4
       }
