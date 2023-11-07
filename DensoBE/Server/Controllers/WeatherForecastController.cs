@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Server.Utils;
 
 namespace Server.Controllers
 {
@@ -12,7 +13,7 @@ namespace Server.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
+        FakeContext fakeContext = new FakeContext();
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
