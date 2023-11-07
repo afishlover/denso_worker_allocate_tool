@@ -57,7 +57,7 @@ namespace Server.Controllers
 
                 return new ContentResult
                 {
-                    Content = JsonConvert.SerializeObject($"Create new worker with id {workerModel.WorkerId}"),
+                    Content = JsonConvert.SerializeObject($"Create new worker with id {workerModel.WorkerId} successfully."),
                     ContentType = "application/json",
                     StatusCode = 200
                 };
@@ -67,7 +67,31 @@ namespace Server.Controllers
                 return new ContentResult
                 {
                     Content = "Create new worker failed.",
-                    StatusCode = 500
+                    StatusCode = 400
+                };
+            };
+        }
+
+        [HttpDelete("DeleteWorker")]
+        public IActionResult DeleteWorker(string workerId)
+        {
+            try
+            {
+                _fakeContext.DeleteWorker(workerId);
+
+                return new ContentResult
+                {
+                    Content = JsonConvert.SerializeObject($"Deleted worker with id {workerId}."),
+                    ContentType = "application/json",
+                    StatusCode = 200
+                };
+            }
+            catch (Exception)
+            {
+                return new ContentResult
+                {
+                    Content = JsonConvert.SerializeObject($"No worker with id {workerId} found."),
+                    StatusCode = 404
                 };
             };
         }

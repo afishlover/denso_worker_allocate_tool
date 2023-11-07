@@ -32,12 +32,5 @@
     "WorkerAge": 21,
     "WorkerSalary": 10000,
     "WorkerStages": []
-  },
-  {
-    "WorkerId": "9d8e6c03-fc8d-45ca-9187-d7f30e20c29d",
-    "WorkerName": "middle bui",
-    "WorkerAge": 21,
-    "WorkerSalary": 30,
-    "WorkerStages": []
   }
 ]
